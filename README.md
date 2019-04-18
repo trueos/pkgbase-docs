@@ -16,7 +16,12 @@ This package base system breaks the base OS down into the following sub-packages
  * userland-tests (Testing frameworks)
  * kernel (Primary kernel / GENERIC)
  * kernel-debug (Kernel debug files)
- * src (FreeBSD base system sources used in pkg builds)
+ 
+Additionally the following packages related to building are also available:
+
+ * src (FreeBSD base system sources used in pkg builds, pkg installs into /usr/src)
+ * buildworld (Installs tarball: /usr/dist/world.txz which contains entire buildworld output)
+ * buildkernel (Installs tarball: /usr/dist/kernel.txz which contains entire buildkernel output)
 
 ### How do I manage these base packages?
 
