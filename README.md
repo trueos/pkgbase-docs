@@ -30,6 +30,6 @@ After a normal run of 'poudriere bulk' using a jail created in the above manner,
 
 ### How can I customize world/kernel?
 
-The [os/buildworld](https://github.com/trueos/trueos-ports/tree/trueos-master/os/buildworld) and [os/buildkernel](https://github.com/trueos/trueos-ports/tree/trueos-master/os/buildkernel) ports each support the typical "make config" usage you would expect via ports. It is possible to set various WITH/WITHOUT options via this method.
+The [os/buildworld](https://github.com/trueos/trueos-ports/tree/trueos-master/os/buildworld) and [os/buildkernel](https://github.com/trueos/trueos-ports/tree/trueos-master/os/buildkernel) ports each support the typical "make config" usage you would expect via ports. It is possible to set various WITH/WITHOUT options via this method. These ports are used to run buildworld / buildkernel once, and assemble the final output into a single tarball stored in /usr/dist/world.txz and /usr/dist/kernel.txz respectively. These are used by the other userland-* and kernel-* packages to re-pack into final form without needing to do multiple runs of 'buildworld/buildkernel'. Additionally it will provide single tarball files of each, which can be fed into other tools that cannot use pkgs natively. 
 
 
