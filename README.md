@@ -28,4 +28,8 @@ Base packages are built with poudriere along with regular ports. This is done by
 
 After a normal run of 'poudriere bulk' using a jail created in the above manner, the base-system ports are automatically included in the resulting package repo and ready for usage.
 
+### How can I customize world/kernel?
+
+The [os/buildworld](https://github.com/trueos/trueos-ports/tree/trueos-master/os/buildworld) and [os/buildkernel](https://github.com/trueos/trueos-ports/tree/trueos-master/os/buildkernel) ports each support the typical "make config" usage you would expect via ports. It is possible to set various WITH/WITHOUT options via this method.
+
 
