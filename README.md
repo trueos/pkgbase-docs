@@ -13,6 +13,8 @@ Table of contents
    * [Developers FAQ](#developers-faq)
       * [How do I build packages](#how-do-i-build-packages)
       * [How can I customize world or kernel](#how-can-i-customize-world-or-kernel)
+      * [Why buildworld and buildkernel](#why-buildworld-and-buildkernel)
+      
 
 What is package base?
 =========
@@ -68,20 +70,22 @@ Developers FAQ
 How do I build packages
 -----
 
+**Note: This assumes you are already comfortable with FreeBSD's ports system and poudriere build tool.**
+
 Base packages are built with poudriere. To get started, you'll to install `ports-mgmt/poudriere-devel` plus a [patch to add base port support](https://github.com/freebsd/poudriere/pull/664), or if you are using our package-base images, you can install `ports-mgmt/poudriere-trueos` to grab a pre-patched version.
 
 This adds the ability to boot-strap a poudriere jail from the [base-ports added to TrueOS](https://github.com/trueos/trueos-ports/tree/trueos-master/os). These ports can be built as normal ports post-install as well, allowing new OS packages to be built anytime, with or without poudriere.
 
 After a normal run of 'poudriere bulk' using a jail created in the above manner, the base-system ports are automatically included in the resulting package repo and ready for usage.
 
-Example (Creating a HEAD package set)
+**Example (Creating a HEAD package set)**
 ```
  # poudriere ports -c -p myports -m git -U "https://github.com/trueos/trueos-ports" -B trueos-master
  # poudriere jail -c -j currentpkgbase -m ports=myports -v 13-CURRENT
  # poudriere bulk -a -j currentpkgbase -p myports
 ```
 
-Example (Creating a 12-Stable package set)
+**Example (Creating a 12-Stable package set)**
 ```
  # poudriere ports -c -p myports -m git -U "https://github.com/trueos/trueos-ports" -B trueos-master
  # cd /usr/local/poudriere/ports/myports && ./update-branch-os.sh os freebsd/stable/12
@@ -89,9 +93,18 @@ Example (Creating a 12-Stable package set)
  # poudriere bulk -a -j currentpkgbase -p myports
 ```
 
+**Note: The 'update-branch-os.sh' script is a helper script to make it easy to switch OS sources in ports. This works with GitHub only. If you wish to pull sources from another location you will need to update the os/src port to reflect this.**
+
+
 How can I customize world or kernel
 -----
 
-The [os/buildworld](https://github.com/trueos/trueos-ports/tree/trueos-master/os/buildworld) and [os/buildkernel](https://github.com/trueos/trueos-ports/tree/trueos-master/os/buildkernel) ports each support the typical "make config" usage you would expect via ports. It is possible to set various WITH/WITHOUT options via this method. These ports are used to run buildworld / buildkernel once, and assemble the final output into a single tarball stored in /usr/dist/world.txz and /usr/dist/kernel.txz respectively. These are used by the other userland-* and kernel-* packages to re-pack into final form without needing to do multiple runs of 'buildworld/buildkernel'. Additionally it will provide single tarball files of each, which can be fed into other tools that cannot use pkgs natively. 
+The [os/buildworld](https://github.com/trueos/trueos-ports/tree/trueos-master/os/buildworld) and [os/buildkernel](https://github.com/trueos/trueos-ports/tree/trueos-master/os/buildkernel) ports each support the typical `make config` usage you would expect via ports. It is possible to set various WITH/WITHOUT options via this method.
+
+
+Why buildworld and buildkernel
+-----
+
+These ports are special to the base package process. They are used to run FreeBSD's **buildworld**/ **buildkernel** targerts once, and assemble the final output into a single tarball stored in /usr/dist/world.txz and /usr/dist/kernel.txz respectively. These are used by the other os/userland-* and os/kernel-* packages to re-pack into the user-facing package without needing to do multiple runs of 'buildworld / buildkernel'. Additionally it will provide single tarball files of each, which can be fed into other tools that cannot use pkgs natively. 
 
 
