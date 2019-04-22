@@ -75,19 +75,19 @@ This adds the ability to boot-strap a poudriere jail from the [base-ports added 
 After a normal run of 'poudriere bulk' using a jail created in the above manner, the base-system ports are automatically included in the resulting package repo and ready for usage.
 
 Example (Creating a HEAD package set)
-`
+```
  # poudriere ports -c -p myports -m git -U "https://github.com/trueos/trueos-ports" -B trueos-master
  # poudriere jail -c -j currentpkgbase -m ports=myports -v 13-CURRENT
  # poudriere bulk -a -j currentpkgbase -p myports
-`
+```
 
 Example (Creating a 12-Stable package set)
-`
+```
  # poudriere ports -c -p myports -m git -U "https://github.com/trueos/trueos-ports" -B trueos-master
  # cd /usr/local/poudriere/ports/myports && ./update-branch-os.sh os freebsd/stable/12
  # poudriere jail -c -j currentpkgbase -m ports=myports -v 12-STABLE
  # poudriere bulk -a -j currentpkgbase -p myports
-`
+```
 
 How can I customize world or kernel
 -----
