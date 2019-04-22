@@ -26,7 +26,7 @@ The TrueOS Project (& iXsystems) are helping to maintain both FreeBSD 13 (HEAD) 
 
 [FreeBSD 13 - master](https://pkg.trueos.org/iso/freebsd-pkgbase/)
 
-[FreeBSD 12 - stable/12](https://pkg.trueos.org/iso/freebsd12-pkgbase/)
+[FreeBSD 12 - stable](https://pkg.trueos.org/iso/freebsd12-pkgbase/)
 
 
 FAQ
