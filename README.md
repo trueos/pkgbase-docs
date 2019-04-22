@@ -27,7 +27,7 @@ FreeBSD has had the 'pkg' system for years now, allowing users easy installation
 Download Images
 =========
 
-The TrueOS Project (& iXsystems) are helping to maintain both FreeBSD 13 (HEAD) and FreeBSD 12 (Stable) images of the base system and complete ports tree. The master images will be updated weekly, while the 12 images will be updated more aggressively, usually daily.
+The [TrueOS Project](https://www.trueos.org) / [iXsystems](https://www.ixsystems.com) are helping to maintain both FreeBSD 13 (HEAD) and FreeBSD 12 (Stable) images of the base system and complete ports tree. The master images will be updated weekly, while the 12 images will be updated more aggressively, usually daily.
 
 [FreeBSD 13 - master](https://pkg.trueos.org/iso/freebsd-pkgbase/)
 
