@@ -8,11 +8,11 @@ Table of contents
    * [What is package base?](#what-is-package-base)
    * [Download Images](#download-images)
    * [Users FAQ](#users-faq)
-      * [What base packages are available?](#what-base-packages-are-available)
-      * [How do I manage these base packages?](#how-do-i-manage-these-base-packages)
+      * [What base packages are available](#what-base-packages-are-available)
+      * [How do I manage these base packages](#how-do-i-manage-these-base-packages)
    * [Developers FAQ](#developers-faq)
-      * [How are these packages built?](#how-are-these-packages-built)
-      * [How can I customize world or kernel?](#how-can-i-customize-world-or-kernel)
+      * [How do I build packages](#how-do-i-build-packages)
+      * [How can I customize world or kernel](#how-can-i-customize-world-or-kernel)
 
 What is package base?
 =========
@@ -33,7 +33,7 @@ The TrueOS Project (& iXsystems) are helping to maintain both FreeBSD 13 (HEAD) 
 Users FAQ
 =========
 
-What base packages are available?
+What base packages are available
 -----
 
 This package base system breaks the base OS down into the following sub-packages:
@@ -52,7 +52,7 @@ Additionally the following packages related to building are also available:
  * buildworld (Installs tarball: /usr/dist/world.txz which contains entire buildworld output)
  * buildkernel (Installs tarball: /usr/dist/kernel.txz which contains entire buildkernel output)
 
-How do I manage these base packages?
+How do I manage these base packages
 -----
 
 Management is done via the usual 'pkg' commands. During upgrades, various conf files in /etc will be merged with local changes and updated. Should an un-mergable conflict exist, pkg will create a "<file>.pkgnew" file which contains the new file contents. These files can be manually inspected and merged into your existing /etc conf files.
@@ -65,14 +65,31 @@ To find a list of any files that need merging you can use the following command:
 Developers FAQ
 =========
 
-How are these packages built?
+How do I build packages
 -----
 
-Base packages are built with poudriere along with regular ports. This is done by using poudriere plus a [patch to add base port support](https://github.com/freebsd/poudriere/pull/664). This adds the ability to boot-strap a poudriere jail from the [base-ports added to TrueOS](https://github.com/trueos/trueos-ports/tree/trueos-master/os). These ports can be built as normal ports post-install as well, allowing new OS packages to be built anytime, with or without poudriere. 
+Base packages are built with poudriere. To get started, you'll to install `ports-mgmt/poudriere-devel` plus a [patch to add base port support](https://github.com/freebsd/poudriere/pull/664), or if you are using our package-base images, you can install `ports-mgmt/poudriere-trueos` to grab a pre-patched version.
+
+This adds the ability to boot-strap a poudriere jail from the [base-ports added to TrueOS](https://github.com/trueos/trueos-ports/tree/trueos-master/os). These ports can be built as normal ports post-install as well, allowing new OS packages to be built anytime, with or without poudriere.
 
 After a normal run of 'poudriere bulk' using a jail created in the above manner, the base-system ports are automatically included in the resulting package repo and ready for usage.
 
-How can I customize world or kernel?
+Example (Creating a HEAD package set)
+`
+ # poudriere ports -c -p myports -m git -U "https://github.com/trueos/trueos-ports" -B trueos-master
+ # poudriere jail -c -j currentpkgbase -m ports=myports -v 13-CURRENT
+ # poudriere bulk -a -j currentpkgbase -p myports
+`
+
+Example (Creating a 12-Stable package set)
+`
+ # poudriere ports -c -p myports -m git -U "https://github.com/trueos/trueos-ports" -B trueos-master
+ # cd /usr/local/poudriere/ports/myports && ./update-branch-os.sh os freebsd/stable/12
+ # poudriere jail -c -j currentpkgbase -m ports=myports -v 12-STABLE
+ # poudriere bulk -a -j currentpkgbase -p myports
+`
+
+How can I customize world or kernel
 -----
 
 The [os/buildworld](https://github.com/trueos/trueos-ports/tree/trueos-master/os/buildworld) and [os/buildkernel](https://github.com/trueos/trueos-ports/tree/trueos-master/os/buildkernel) ports each support the typical "make config" usage you would expect via ports. It is possible to set various WITH/WITHOUT options via this method. These ports are used to run buildworld / buildkernel once, and assemble the final output into a single tarball stored in /usr/dist/world.txz and /usr/dist/kernel.txz respectively. These are used by the other userland-* and kernel-* packages to re-pack into final form without needing to do multiple runs of 'buildworld/buildkernel'. Additionally it will provide single tarball files of each, which can be fed into other tools that cannot use pkgs natively. 
