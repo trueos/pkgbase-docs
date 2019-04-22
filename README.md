@@ -7,16 +7,17 @@ Table of contents
 =================
    * [What is package base?](#what-is-package-base)
    * [Download Images](#download-images)
-   * [FAQ](#faq)
+   * [Users FAQ](#users-faq)
       * [What base packages are available?](#what-base-packages-are-available)
       * [How do I manage these base packages?](#how-do-i-manage-these-base-packages)
+   * [Developers FAQ](#developers-faq)
       * [How are these packages built?](#how-are-these-packages-built)
       * [How can I customize world or kernel?](#how-can-i-customize-world-or-kernel)
 
 What is package base?
 =========
 
-FreeBSD has had the 'pkg' system for years now, allowing users easy installation and management of 3rd party applictions that originate in the ports tree. Package base refers to the process of getting the FreeBSD base system (userland and kernel) into package form, allowing the same management tools to be used.
+FreeBSD has had the 'pkg' system for years now, allowing users easy installation and management of 3rd party applictions that originate in the ports tree. Package base refers to the process of getting the FreeBSD base system (userland and kernel) into package form, allowing the same management tools to be used. This is ends the requirement of needing to use multiple tools to update a system, such as "freebsd-update" and then "pkg". Additionally, this also allows tighter integration between the standard FreeBSD base system and the Ports / Package repos. Now updates will be done consistently across the two, ensuring packages and userland don't run into problems that result from a mis-matched userland/kernel and 3rd party applications.
 
 
 Download Images
@@ -29,7 +30,7 @@ The TrueOS Project (& iXsystems) are helping to maintain both FreeBSD 13 (HEAD) 
 [FreeBSD 12 - stable](https://pkg.trueos.org/iso/freebsd12-pkgbase/)
 
 
-FAQ
+Users FAQ
 =========
 
 What base packages are available?
@@ -54,7 +55,15 @@ Additionally the following packages related to building are also available:
 How do I manage these base packages?
 -----
 
-Management is done via the usual 'pkg' commands. During upgrades, various conf files in /etc will be merged with local changes and updated. Should an un-mergable conflict exist, pkg will create a "<file>.pkgnew" file which contains the new file contents.
+Management is done via the usual 'pkg' commands. During upgrades, various conf files in /etc will be merged with local changes and updated. Should an un-mergable conflict exist, pkg will create a "<file>.pkgnew" file which contains the new file contents. These files can be manually inspected and merged into your existing /etc conf files.
+  
+To find a list of any files that need merging you can use the following command:
+
+` # find /etc | grep '.pkgnew$'`
+
+
+Developers FAQ
+=========
 
 How are these packages built?
 -----
