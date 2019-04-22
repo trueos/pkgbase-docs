@@ -10,6 +10,8 @@ Table of contents
    * [Users FAQ](#users-faq)
       * [What base packages are available](#what-base-packages-are-available)
       * [How do I manage these base packages](#how-do-i-manage-these-base-packages)
+      * [How long will these repos get updated](#how-long-will-these-repos-get-updated)
+      * [Where can I discuss further](#where-can-i-discuss-further)
    * [Developers FAQ](#developers-faq)
       * [How do I build packages](#how-do-i-build-packages)
       * [How can I customize world or kernel](#how-can-i-customize-world-or-kernel)
@@ -70,6 +72,15 @@ To find a list of any files that need merging you can use the following command:
 ` # find /etc | grep '.pkgnew$'`
 
 
+How long will these repos get updated
+-----
+
+Right now we are looking to keep building / publishing these base package repos for as long as users find them useful. When the FreeBSD project begins publishing base packages for their official releases we will probably wind down the updates or reduce the frequency.
+
+Where can I discuss further
+-----
+
+Users are encouraged to join the discussion on the [pkgbase mailing list](https://lists.freebsd.org/mailman/listinfo/freebsd-pkgbase).
 
 
 Developers FAQ
