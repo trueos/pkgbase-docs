@@ -22,6 +22,8 @@ What is package base?
 FreeBSD has had the 'pkg' system for years now, allowing users easy installation and management of 3rd party applictions that originate in the ports tree. Package base refers to the process of getting the FreeBSD base system (userland and kernel) into package form, allowing the same management tools to be used. This is ends the requirement of needing to use multiple tools to update a system, such as "freebsd-update" and then "pkg". Additionally, this also allows tighter integration between the standard FreeBSD base system and the Ports / Package repos. Now updates will be done consistently across the two, ensuring packages and userland don't run into problems that result from a mis-matched userland/kernel and 3rd party applications.
 
 
+
+
 Download Images
 =========
 
@@ -30,6 +32,8 @@ The TrueOS Project (& iXsystems) are helping to maintain both FreeBSD 13 (HEAD) 
 [FreeBSD 13 - master](https://pkg.trueos.org/iso/freebsd-pkgbase/)
 
 [FreeBSD 12 - stable](https://pkg.trueos.org/iso/freebsd12-pkgbase/)
+
+
 
 
 Users FAQ
@@ -54,6 +58,8 @@ Additionally the following packages related to building are also available:
  * buildworld (Installs tarball: /usr/dist/world.txz which contains entire buildworld output)
  * buildkernel (Installs tarball: /usr/dist/kernel.txz which contains entire buildkernel output)
 
+
+
 How do I manage these base packages
 -----
 
@@ -64,8 +70,12 @@ To find a list of any files that need merging you can use the following command:
 ` # find /etc | grep '.pkgnew$'`
 
 
+
+
 Developers FAQ
 =========
+
+
 
 How do I build packages
 -----
@@ -96,10 +106,14 @@ After a normal run of 'poudriere bulk' using a jail created in the above manner,
 **Note: The 'update-branch-os.sh' script is a helper script to make it easy to switch OS sources in ports. This works with GitHub only. If you wish to pull sources from another location you will need to update the os/src port to reflect this.**
 
 
+
+
 How can I customize world or kernel
 -----
 
 The [os/buildworld](https://github.com/trueos/trueos-ports/tree/trueos-master/os/buildworld) and [os/buildkernel](https://github.com/trueos/trueos-ports/tree/trueos-master/os/buildkernel) ports each support the typical `make config` usage you would expect via ports. It is possible to set various WITH/WITHOUT options via this method.
+
+
 
 
 Why buildworld and buildkernel
