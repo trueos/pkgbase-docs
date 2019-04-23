@@ -10,10 +10,12 @@ Table of contents
    * [Users FAQ](#users-faq)
       * [What base packages are available](#what-base-packages-are-available)
       * [How do I manage these base packages](#how-do-i-manage-these-base-packages)
+      * [Update Frequency](#update-frequency)
       * [How long will these repos get updated](#how-long-will-these-repos-get-updated)
       * [Where can I discuss further](#where-can-i-discuss-further)
    * [Developers FAQ](#developers-faq)
       * [How do I build packages](#how-do-i-build-packages)
+      * [Changing OS target](#changing-os-target)
       * [How can I customize world or kernel](#how-can-i-customize-world-or-kernel)
       * [Why buildworld and buildkernel](#why-buildworld-and-buildkernel)
       
@@ -29,7 +31,7 @@ FreeBSD has had the 'pkg' system for years now, allowing users easy installation
 Download Images
 =========
 
-The [TrueOS Project](https://www.trueos.org) / [iXsystems](https://www.ixsystems.com) are helping to maintain both FreeBSD 13 (HEAD) and FreeBSD 12 (Stable) images of the base system and complete ports tree. The master images will be updated weekly, while the 12 images will be updated more aggressively, usually daily.
+The [TrueOS Project](https://www.trueos.org) / [iXsystems](https://www.ixsystems.com) are helping to maintain both FreeBSD 13 (HEAD) and FreeBSD 12 (Stable) images of the base system and complete ports tree. 
 
 [FreeBSD 13 - master](https://pkg.trueos.org/iso/freebsd-pkgbase/)
 
@@ -72,6 +74,11 @@ To find a list of any files that need merging you can use the following command:
 ` # find /etc | grep '.pkgnew$'`
 
 
+Update frequency
+-----
+The master images will be updated weekly, while the 12 images will be updated more aggressively, usually every 48 hours or so. 
+
+
 How long will these repos get updated
 -----
 
@@ -102,27 +109,39 @@ After a normal run of 'poudriere bulk' using a jail created in the above manner,
 **Example (Creating a HEAD package set)**
 ```
  # poudriere ports -c -p myports -m git -U "https://github.com/trueos/trueos-ports" -B trueos-master
- # poudriere jail -c -j currentpkgbase -m ports=myports -v 13-CURRENT
- # poudriere bulk -a -j currentpkgbase -p myports
+ # poudriere jail -c -j myjail -m ports=myports -v 13-CURRENT
+ # poudriere bulk -a -j myjail -p myports
 ```
 
 **Example (Creating a 12-Stable package set)**
 ```
  # poudriere ports -c -p myports -m git -U "https://github.com/trueos/trueos-ports" -B trueos-master
  # cd /usr/local/poudriere/ports/myports && ./update-branch-os.sh os freebsd/stable/12
- # poudriere jail -c -j currentpkgbase -m ports=myports -v 12-STABLE
- # poudriere bulk -a -j currentpkgbase -p myports
+ # poudriere jail -c -j myjail -m ports=myports -v 12-STABLE
+ # poudriere bulk -a -j myjail -p myports
 ```
 
-**Note: The 'update-branch-os.sh' script is a helper script to make it easy to switch OS sources in ports. This works with GitHub only. If you wish to pull sources from another location you will need to update the os/src port to reflect this.**
+**Note: The 'update-branch-os.sh' script is a local TrueOS helper script to make it easy to switch OS sources in ports. This works with GitHub only. If you wish to pull sources from another location you will need to update the os/src port to reflect this.**
 
 
+Changing OS target
+-----
+
+Within ports, the [os/src](https://github.com/trueos/trueos-ports/tree/trueos-master/os/src) port determines what version / branch of FreeBSD is going to be used to build a jail / packages. This port can be edited to switch to pull sources from any location which ports can support. 
+
+Within the TrueOS ports tree, we ship the [update-branch-os.sh](https://github.com/trueos/trueos-ports/tree/trueos-master/update-branch-os.sh) utility which can be used to quickly switch sources between branches and tags on the [trueos/trueos](https://github.com/trueos/trueos) GitHub repo.
+
+**Example Switching to freebsd/stable/12 branch **
+```
+# cd /usr/local/poudriere/ports/myports
+# ./update-branch-os.sh os freebsd/stable/12
+```
 
 
 How can I customize world or kernel
 -----
 
-The [os/buildworld](https://github.com/trueos/trueos-ports/tree/trueos-master/os/buildworld) and [os/buildkernel](https://github.com/trueos/trueos-ports/tree/trueos-master/os/buildkernel) ports each support the typical `make config` usage you would expect via ports. It is possible to set various WITH/WITHOUT options via this method.
+The [os/buildworld](https://github.com/trueos/trueos-ports/tree/trueos-master/os/buildworld) and [os/buildkernel](https://github.com/trueos/trueos-ports/tree/trueos-master/os/buildkernel) ports each support the typical `make config` usage you would expect via ports. It is possible to set various WITH/WITHOUT options via this method. When using poudriere, you will want to refer to poudrieres man pages which explain how to set various port options for jails / ports trees.
 
 
 
