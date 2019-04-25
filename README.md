@@ -1,29 +1,29 @@
 pkgbase-docs
 =========
 
-Information / Documentation on TrueOS inspired base packages for FreeBSD
+Information and Documentation on TrueOS-Inspired Base Packages for FreeBSD
 
-Table of contents
+Table of Contents
 =================
-   * [What is package base?](#what-is-package-base)
+   * [What is pkgbase?](#what-is-pkgbase?)
    * [Download Images](#download-images)
-   * [Users FAQ](#users-faq)
-      * [What base packages are available](#what-base-packages-are-available)
-      * [How do I manage these base packages](#how-do-i-manage-these-base-packages)
+   * [User FAQ](#user-faq)
+      * [Which base packages are available?](#which-base-packages-are-available?)
+      * [How do I manage these base packages?](#how-do-i-manage-these-base-packages?)
       * [Update Frequency](#update-frequency)
-      * [How long will these repos get updated](#how-long-will-these-repos-get-updated)
-      * [Where can I discuss further](#where-can-i-discuss-further)
-   * [Developers FAQ](#developers-faq)
-      * [How do I build packages](#how-do-i-build-packages)
-      * [Changing OS target](#changing-os-target)
-      * [How can I customize world or kernel](#how-can-i-customize-world-or-kernel)
-      * [Why buildworld and buildkernel](#why-buildworld-and-buildkernel)
+      * [How long will these repos get updated?](#how-long-will-these-repos-get-updated?)
+      * [Where can I discuss further?](#where-can-i-discuss-further?)
+   * [Developer FAQ](#developers-faq)
+      * [How do I build packages?](#how-do-i-build-packages?)
+      * [Changing OS Target](#changing-os-target)
+      * [How can I customize world or kernel?](#how-can-i-customize-world-or-kernel?)
+      * [Why buildworld and buildkernel?](#why-buildworld-and-buildkernel?)
       
 
-What is package base?
+What is pkgbase?
 =========
 
-FreeBSD has had the 'pkg' system for years now, allowing users easy installation and management of 3rd party applictions that originate in the ports tree. Package base refers to the process of getting the FreeBSD base system (userland and kernel) into package form, allowing the same management tools to be used. This is ends the requirement of needing to use multiple tools to update a system, such as "freebsd-update" and then "pkg". Additionally, this also allows tighter integration between the standard FreeBSD base system and the Ports / Package repos. Now updates will be done consistently across the two, ensuring packages and userland don't run into problems that result from a mis-matched userland/kernel and 3rd party applications.
+FreeBSD has had the 'pkg' system for years now, giving users easy installation and management of third party applications from the ports tree. "pkgbase" refers to the process of getting the FreeBSD base system (userland and kernel) into package form, allowing the same management tools to be used. This ends the requirement of multiple tools to update a system, like "freebsd-update" and then "pkg". Additionally, it more tightly integrates the standard FreeBSD base system and the ports/package repos. Now updates are done consistently across the two, ensuring packages and userland don't run into problems that result from a mis-matched userland/kernel and third party applications.
 
 
 
@@ -31,7 +31,7 @@ FreeBSD has had the 'pkg' system for years now, allowing users easy installation
 Download Images
 =========
 
-The [TrueOS Project](https://www.trueos.org) / [iXsystems](https://www.ixsystems.com) are helping to maintain both FreeBSD 13 (HEAD) and FreeBSD 12 (Stable) images of the base system and complete ports tree. 
+The [TrueOS Project](https://www.trueos.org) / [iXsystems](https://www.ixsystems.com) is maintaining both FreeBSD 13 (HEAD) and FreeBSD 12 (Stable) images of the base system and complete ports tree.
 
 [FreeBSD 13 - master](https://pkg.trueos.org/iso/freebsd-pkgbase/)
 
@@ -40,13 +40,13 @@ The [TrueOS Project](https://www.trueos.org) / [iXsystems](https://www.ixsystems
 
 
 
-Users FAQ
+User FAQ
 =========
 
-What base packages are available
+Which base packages are available?
 -----
 
-This package base system breaks the base OS down into the following sub-packages:
+This pkgbase system breaks the base OS into these sub-packages:
  * userland (Meta Package for other userland packages)
  * userland-base (Primary OS binaries / libraries, AKA 'runtime')
  * userland-docs (Manpages / info)
@@ -56,7 +56,7 @@ This package base system breaks the base OS down into the following sub-packages
  * kernel (Primary kernel / GENERIC)
  * kernel-debug (Kernel debug files)
  
-Additionally the following packages related to building are also available:
+Additional packages related to building are also available:
 
  * src (FreeBSD base system sources used in pkg builds, pkg installs into /usr/src)
  * buildworld (Installs tarball: /usr/dist/world.txz which contains entire buildworld output)
@@ -64,27 +64,27 @@ Additionally the following packages related to building are also available:
 
 
 
-How do I manage these base packages
+How do I manage these base packages?
 -----
 
-Management is done via the usual 'pkg' commands. During upgrades, various conf files in /etc will be merged with local changes and updated. Should an un-mergable conflict exist, pkg will create a "<file>.pkgnew" file which contains the new file contents. These files can be manually inspected and merged into your existing /etc conf files.
+Management is done with the usual 'pkg' commands. During upgrades, various conf files in `/etc` will be merged with local changes and updated. If an unmergeable conflict exists, pkg creates a `_file_.pkgnew` file containing the new file contents. These files can be manually inspected and merged into existing `/etc` conf files.
   
-To find a list of any files that need merging you can use the following command:
+To find a list of any files that need merging:
 
 ` # find /etc | grep '.pkgnew$'`
 
 
-Update frequency
+Update Frequency
 -----
 The master images will be updated weekly, while the 12 images will be updated more aggressively, usually every 48 hours or so. 
 
 
-How long will these repos get updated
+How long will these repos get updated?
 -----
 
-Right now we are looking to keep building / publishing these base package repos for as long as users find them useful. When the FreeBSD project begins publishing base packages for their official releases we will probably wind down the updates or reduce the frequency.
+Right now we are looking to keep building and publishing these base package repos for as long as users find them useful. When the FreeBSD project begins publishing base packages for their official releases we will probably wind down the updates or reduce the frequency.
 
-Where can I discuss further
+Where can I discuss further?
 -----
 
 Users are encouraged to join the discussion on the [pkgbase mailing list](https://lists.freebsd.org/mailman/listinfo/freebsd-pkgbase).
@@ -95,16 +95,16 @@ Developers FAQ
 
 
 
-How do I build packages
+How do I build packages?
 -----
 
 **Note: This assumes you are already comfortable with FreeBSD's ports system and poudriere build tool.**
 
-Base packages are built with poudriere. To get started, you'll to install `ports-mgmt/poudriere-devel` plus a [patch to add base port support](https://github.com/freebsd/poudriere/pull/664), or if you are using our package-base images, you can install `ports-mgmt/poudriere-trueos` to grab a pre-patched version.
+Base packages are built with poudriere. To get started, install `ports-mgmt/poudriere-devel` plus a [patch to add base port support](https://github.com/freebsd/poudriere/pull/664). Or if you are using our package-base images, you can install `ports-mgmt/poudriere-trueos` with a pre-patched version.
 
-This adds the ability to boot-strap a poudriere jail from the [base-ports added to TrueOS](https://github.com/trueos/trueos-ports/tree/trueos-master/os). These ports can be built as normal ports post-install as well, allowing new OS packages to be built anytime, with or without poudriere.
+This adds the ability to bootstrap a poudriere jail from the [base-ports added to TrueOS](https://github.com/trueos/trueos-ports/tree/trueos-master/os). These ports can be built as normal ports post-install as well, allowing new OS packages to be built any time, with or without poudriere.
 
-After a normal run of 'poudriere bulk' using a jail created in the above manner, the base-system ports are automatically included in the resulting package repo and ready for usage.
+After a normal run of `poudriere bulk` using a jail created in the above manner, the base-system ports are automatically included in the resulting package repo and ready for use.
 
 **Example (Creating a HEAD package set)**
 ```
@@ -121,13 +121,13 @@ After a normal run of 'poudriere bulk' using a jail created in the above manner,
  # poudriere bulk -a -j myjail -p myports
 ```
 
-**Note: The 'update-branch-os.sh' script is a local TrueOS helper script to make it easy to switch OS sources in ports. This works with GitHub only. If you wish to pull sources from another location you will need to update the os/src port to reflect this.**
+**Note: The 'update-branch-os.sh' script is a local TrueOS helper script to make it easy to switch OS sources in ports. This works with GitHub only. If you wish to pull sources from another location, update the os/src port to reflect this.**
 
 
-Changing OS target
+Changing OS Target
 -----
 
-Within ports, the [os/src](https://github.com/trueos/trueos-ports/tree/trueos-master/os/src) port determines what version / branch of FreeBSD is going to be used to build a jail / packages. This port can be edited to switch to pull sources from any location which ports can support. 
+Within ports, the [os/src](https://github.com/trueos/trueos-ports/tree/trueos-master/os/src) port determines what version / branch of FreeBSD is used to build a jail and packages. This port can be edited to pull sources from any location which ports can support. 
 
 Within the TrueOS ports tree, we ship the [update-branch-os.sh](https://github.com/trueos/trueos-ports/tree/trueos-master/update-branch-os.sh) utility which can be used to quickly switch sources between branches and tags on the [trueos/trueos](https://github.com/trueos/trueos) GitHub repo.
 
@@ -138,17 +138,16 @@ Within the TrueOS ports tree, we ship the [update-branch-os.sh](https://github.c
 ```
 
 
-How can I customize world or kernel
+How can I customize world or kernel?
 -----
 
-The [os/buildworld](https://github.com/trueos/trueos-ports/tree/trueos-master/os/buildworld) and [os/buildkernel](https://github.com/trueos/trueos-ports/tree/trueos-master/os/buildkernel) ports each support the typical `make config` usage you would expect via ports. It is possible to set various WITH/WITHOUT options via this method. When using poudriere, you will want to refer to poudrieres man pages which explain how to set various port options for jails / ports trees.
+The [os/buildworld](https://github.com/trueos/trueos-ports/tree/trueos-master/os/buildworld) and [os/buildkernel](https://github.com/trueos/trueos-ports/tree/trueos-master/os/buildkernel) ports each support the typical `make config` usage expected in ports. It is possible to set various WITH/WITHOUT options through this method. When using poudriere, refer to the poudriere man pages which explain how to set various port options for jails and ports trees.
 
 
 
 
-Why buildworld and buildkernel
+Why buildworld and buildkernel?
 -----
 
-These ports are special to the base package process. They are used to run FreeBSD's **buildworld**/ **buildkernel** targerts once, and assemble the final output into a single tarball stored in /usr/dist/world.txz and /usr/dist/kernel.txz respectively. These are used by the other os/userland-* and os/kernel-* packages to re-pack into the user-facing package without needing to do multiple runs of 'buildworld / buildkernel'. Additionally it will provide single tarball files of each, which can be fed into other tools that cannot use pkgs natively. 
-
+These ports are special to the base package process. They run FreeBSD's **buildworld**/ **buildkernel** targets once and assemble the final outputs into single tarballs stored in /usr/dist/world.txz and /usr/dist/kernel.txz respectively. These are used by the other os/userland-* and os/kernel-* packages to re-pack into the user-facing package without needing multiple runs of 'buildworld/buildkernel'. Additionally, it provides single tarball files of each, which can be fed into other tools that cannot use packages natively. 
 
