@@ -5,19 +5,19 @@ Information and Documentation on TrueOS-Inspired Base Packages for FreeBSD
 
 Table of Contents
 =================
-   * [What is pkgbase?](#what-is-pkgbase?)
+   * [What is pkgbase?](#what-is-pkgbase)
    * [Download Images](#download-images)
    * [User FAQ](#user-faq)
-      * [Which base packages are available?](#which-base-packages-are-available?)
-      * [How do I manage these base packages?](#how-do-i-manage-these-base-packages?)
+      * [Which base packages are available?](#which-base-packages-are-available)
+      * [How do I manage these base packages?](#how-do-i-manage-these-base-packages)
       * [Update Frequency](#update-frequency)
-      * [How long will these repos get updated?](#how-long-will-these-repos-get-updated?)
-      * [Where can I discuss further?](#where-can-i-discuss-further?)
+      * [How long will these repos get updated?](#how-long-will-these-repos-get-updated)
+      * [Where can I discuss further?](#where-can-i-discuss-further)
    * [Developer FAQ](#developers-faq)
-      * [How do I build packages?](#how-do-i-build-packages?)
+      * [How do I build packages?](#how-do-i-build-packages)
       * [Changing OS Target](#changing-os-target)
-      * [How can I customize world or kernel?](#how-can-i-customize-world-or-kernel?)
-      * [Why buildworld and buildkernel?](#why-buildworld-and-buildkernel?)
+      * [How can I customize world or kernel?](#how-can-i-customize-world-or-kernel)
+      * [Why buildworld and buildkernel?](#why-buildworld-and-buildkernel)
       
 
 What is pkgbase?
