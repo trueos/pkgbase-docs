@@ -67,7 +67,7 @@ Additional packages related to building are also available:
 How do I manage these base packages?
 -----
 
-Management is done with the usual 'pkg' commands. During upgrades, various conf files in `/etc` will be merged with local changes and updated. If an unmergeable conflict exists, pkg creates a `_file_.pkgnew` file containing the new file contents. These files can be manually inspected and merged into existing `/etc` conf files.
+Management is done with the usual 'pkg' commands. During upgrades, various conf files in `/etc` will be merged with local changes and updated. If an unmergeable conflict exists, pkg creates a _`file`_`.pkgnew` file containing the new file contents. These files can be manually inspected and merged into existing `/etc` conf files.
   
 To find a list of any files that need merging:
 
