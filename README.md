@@ -23,7 +23,7 @@ Table of Contents
 What is pkgbase?
 =========
 
-FreeBSD has had the 'pkg' system for years now, giving users easy installation and management of third party applications from the ports tree. "pkgbase" refers to the process of getting the FreeBSD base system (userland and kernel) into package form, allowing the same management tools to be used. This ends the requirement of multiple tools to update a system, like "freebsd-update" and then "pkg". Additionally, it more tightly integrates the standard FreeBSD base system and the ports/package repos. Now updates are done consistently across the two, ensuring packages and userland don't run into problems that result from a mis-matched userland/kernel and third party applications.
+FreeBSD has had the `pkg` system for years now, giving users easy installation and management of third party applications from the ports tree. "pkgbase" refers to the process of getting the FreeBSD base system (userland and kernel) into package form, allowing the same management tools to be used. This ends the requirement of multiple tools to update a system, like `freebsd-update` and then `pkg`. Additionally, it more tightly integrates the standard FreeBSD base system and the ports/package repos. Now updates are done consistently across the two, ensuring packages and userland don't run into problems that result from a mis-matched userland/kernel and third party applications.
 
 
 
@@ -58,7 +58,7 @@ This pkgbase system breaks the base OS into these sub-packages:
  
 Additional packages related to building are also available:
 
- * src (FreeBSD base system sources used in pkg builds, pkg installs into /usr/src)
+ * src (FreeBSD base system sources used in pkg builds, pkg installs into `/usr/src`)
  * buildworld (Installs tarball: /usr/dist/world.txz which contains entire buildworld output)
  * buildkernel (Installs tarball: /usr/dist/kernel.txz which contains entire buildkernel output)
 
@@ -67,7 +67,7 @@ Additional packages related to building are also available:
 How do I manage these base packages?
 -----
 
-Management is done with the usual 'pkg' commands. During upgrades, various conf files in `/etc` will be merged with local changes and updated. If an unmergeable conflict exists, pkg creates a _`file`_`.pkgnew` file containing the new file contents. These files can be manually inspected and merged into existing `/etc` conf files.
+Management is done with the usual `pkg` commands. During upgrades, various conf files in `/etc` will be merged with local changes and updated. If an unmergeable conflict exists, pkg creates a _`file`_`.pkgnew` file containing the new file contents. These files can be manually inspected and merged into existing `/etc` conf files.
   
 To find a list of any files that need merging:
 
@@ -121,7 +121,7 @@ After a normal run of `poudriere bulk` using a jail created in the above manner,
  # poudriere bulk -a -j myjail -p myports
 ```
 
-**Note: The 'update-branch-os.sh' script is a local TrueOS helper script to make it easy to switch OS sources in ports. This works with GitHub only. If you wish to pull sources from another location, update the os/src port to reflect this.**
+**Note: The `update-branch-os.sh` script is a local TrueOS helper script to make it easy to switch OS sources in ports. This works with GitHub only. If you wish to pull sources from another location, update the os/src port to reflect this.**
 
 
 Changing OS Target
@@ -149,5 +149,5 @@ The [os/buildworld](https://github.com/trueos/trueos-ports/tree/trueos-master/os
 Why buildworld and buildkernel?
 -----
 
-These ports are special to the base package process. They run FreeBSD's **buildworld**/ **buildkernel** targets once and assemble the final outputs into single tarballs stored in /usr/dist/world.txz and /usr/dist/kernel.txz respectively. These are used by the other os/userland-* and os/kernel-* packages to re-pack into the user-facing package without needing multiple runs of 'buildworld/buildkernel'. Additionally, it provides single tarball files of each, which can be fed into other tools that cannot use packages natively. 
+These ports are special to the base package process. They run FreeBSD's **buildworld**/ **buildkernel** targets once and assemble the final outputs into single tarballs stored in `/usr/dist/world.txz` and `/usr/dist/kernel.txz` respectively. These are used by the other `os/userland-*` and `os/kernel-*` packages to re-pack into the user-facing package without needing multiple runs of `buildworld/buildkernel`. Additionally, it provides single tarball files of each, which can be fed into other tools that cannot use packages natively. 
 
