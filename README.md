@@ -53,14 +53,17 @@ This pkgbase system breaks the base OS into these sub-packages:
  * userland-debug (Debug files in /usr/lib/debug)
  * userland-lib32 (32bit compat libraries)
  * userland-tests (Testing frameworks)
- * kernel (Primary kernel / GENERIC)
- * kernel-debug (Kernel debug files)
+ * kernel (Primary kernel / GENERIC or -NODEBUG)
+ * kernel-debug (Kernel with Witness and other debugging)
+ * kernel-symbols (Kernel debug symbols in /use/lib/debug)
+ * kernel-debug-symbols (Kernel debug symbols in /use/lib/debug for Witness kernel)
  
 Additional packages related to building are also available:
 
  * src (FreeBSD base system sources used in pkg builds, pkg installs into `/usr/src`)
  * buildworld (Installs tarball: /usr/dist/world.txz which contains entire buildworld output)
  * buildkernel (Installs tarball: /usr/dist/kernel.txz which contains entire buildkernel output)
+ * buildkernel-debug (Installs tarball: /usr/dist/kernel-debug.txz which contains entire buildkernel output for Witness enabled kernel)
 
 
 
