@@ -12,7 +12,7 @@ Table of Contents
       * [How do I manage these base packages?](#how-do-i-manage-these-base-packages)
       * [Update Frequency](#update-frequency)
       * [How long will these repos get updated?](#how-long-will-these-repos-get-updated)
-      * [Why not XXX release version?](#why-not-x-release-version)
+      * [Why not X release version?](#why-not-x-release-version)
       * [Where can I discuss further?](#where-can-i-discuss-further)
    * [Developer FAQ](#developers-faq)
       * [How do I build packages?](#how-do-i-build-packages)
