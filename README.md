@@ -33,9 +33,9 @@ Download Images
 
 The [TrueOS Project](https://www.trueos.org) / [iXsystems](https://www.ixsystems.com) is maintaining both FreeBSD 13 (HEAD) and FreeBSD 12 (Stable) images of the base system and complete ports tree.
 
-[FreeBSD 13 - master](https://pkg.trueos.org/iso/freebsd-pkgbase/)
+[FreeBSD 13-CURRENT](https://pkg.trueos.org/iso/freebsd-pkgbase/)
 
-[FreeBSD 12 - stable](https://pkg.trueos.org/iso/freebsd12-pkgbase/)
+[FreeBSD 12-STABLE](https://pkg.trueos.org/iso/freebsd12-pkgbase/)
 
 
 
@@ -79,7 +79,7 @@ To find a list of any files that need merging:
 
 Update Frequency
 -----
-The master images will be updated weekly, while the 12 images will be updated more aggressively, usually every 48 hours or so. 
+The 13-CURRENT images will be updated weekly, while the 12-STABLE images will be updated more aggressively, usually every 48 hours or so. 
 
 
 How long will these repos get updated?
@@ -91,6 +91,7 @@ Where can I discuss further?
 -----
 
 Users are encouraged to join the discussion on the [pkgbase mailing list](https://lists.freebsd.org/mailman/listinfo/freebsd-pkgbase).
+
 
 
 Developers FAQ
