@@ -12,6 +12,7 @@ Table of Contents
       * [How do I manage these base packages?](#how-do-i-manage-these-base-packages)
       * [Update Frequency](#update-frequency)
       * [How long will these repos get updated?](#how-long-will-these-repos-get-updated)
+      * [Why not XXX release version?](#why-not-xxx-release-version)
       * [Where can I discuss further?](#where-can-i-discuss-further)
    * [Developer FAQ](#developers-faq)
       * [How do I build packages?](#how-do-i-build-packages)
@@ -86,6 +87,12 @@ How long will these repos get updated?
 -----
 
 Right now we are looking to keep building and publishing these base package repos for as long as users find them useful. When the FreeBSD project begins publishing base packages for their official releases we will probably wind down the updates or reduce the frequency.
+
+
+Why not XXX release version?
+-----
+This CFT is intended to help test pkg base, of which updating is a huge part. Release versions of FreeBSD tend to not change that often. We may consider a release build at a later point after the initial images have shaken out issues.
+
 
 Where can I discuss further?
 -----
