@@ -27,6 +27,10 @@ What is pkgbase?
 FreeBSD has had the `pkg` system for years now, giving users easy installation and management of third party applications from the ports tree. "pkgbase" refers to the process of getting the FreeBSD base system (userland and kernel) into package form, allowing the same management tools to be used. This ends the requirement of multiple tools to update a system, like `freebsd-update` and then `pkg`. Additionally, it more tightly integrates the standard FreeBSD base system and the ports/package repos. Now updates are done consistently across the two, ensuring packages and userland don't run into problems that result from a mis-matched userland/kernel and third party applications.
 
 
+What is a CFT?
+=========
+
+A CFT is a *Call For Testing*. It's a notice that a project is ready for wide spread review and testing. This CFT is to raise awareness and gather input about the work being done. Comments, constructive criticsim,and even patches are all a helpful part of the process.
 
 
 Download Images
