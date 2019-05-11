@@ -14,6 +14,8 @@ Table of Contents
       * [How long will these repos get updated?](#how-long-will-these-repos-get-updated)
       * [Why not X release version?](#why-not-x-release-version)
       * [Where can I discuss further?](#where-can-i-discuss-further)
+   * [NEW! Flavors support](#flavors-support)
+     * [How do I use flavors?](how-do-i-use-flavors)
    * [Developer FAQ](#developers-faq)
       * [How do I build packages?](#how-do-i-build-packages)
       * [Changing OS Target](#changing-os-target)
@@ -102,6 +104,45 @@ Where can I discuss further?
 -----
 
 Users are encouraged to join the discussion on the [pkgbase mailing list](https://lists.freebsd.org/mailman/listinfo/freebsd-pkgbase).
+
+
+
+Flavors support
+=========
+
+As of May 11th, 2019 our package base repositories have gained the support of FLAVORS. What does this mean? It means with pkg it’s now possible to switch between different types of base system builds. We’ve created three flavors for testing:
+
+‘generic’ - Default FreeBSD world/kernel flags
+‘minimal’ - Build with a bunch of WITHOUT flags set
+https://github.com/trueos/trueos-ports/blob/334b9246300fc5b9f7dc2057b48464ff193f4f9d/Mk/Uses/os.mk#L72-L86
+‘zol’ - Build of ‘generic’ FreeBSD flavor, but setting WITHOUT_ZFS and a dependency on ‘sysutils/zol’
+
+How do I use flavors?
+-----
+
+If you are running the pre-flavor package set we originally published in the Call for Testing, you’ll need to follow these steps to switch to the package set with flavors:
+
+# pkg set --change-name userland:os-generic-userland
+# pkg set --change-name userland-base:os-generic-userland-base
+# pkg set --change-name userland-docs:os-generic-userland-docs
+# pkg set --change-name kernel:os-generic-kernel
+
+Repeat that process for lib32, debug, tests, or any other optional base packages you have installed. After you’re finished switching to the flavors package set,  run ‘pkg upgrade’ and it’ll upgrade you to the new packages.
+
+
+You can also switch between flavor packages using a similar method. For example, to switch from the generic -> zol flavors:
+
+# pkg set --change-name os-generic-userland:os-zol-userland
+# pkg set --change-name os-generic-userland-base:os-zol-userland-base
+# pkg set --change-name os-generic-userland-docs:os-zol-userland-docs
+# pkg set --change-name os-generic-kernel:os-zol-kernel
+
+Repeat this process for any other base packages you have installed. “#pkg info | grep ‘^os-’” can help you find any other installed base packages.
+
+**Word of caution!!**
+
+No matter how tempted you are, avoid using ‘pkg install’ try and change flavors. Pkg will detect a conflict with the currently installed flavor and proceed to de-install it, destroying all your config files in /etc. That will ruin your day. Using name-changes and ‘pkg upgrade’ seems to be the safest route at this time, but please let us know if you find any other working alternatives.
+
 
 
 
