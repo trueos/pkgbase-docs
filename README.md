@@ -122,20 +122,24 @@ How do I use flavors?
 
 If you are running the pre-flavor package set we originally published in the Call for Testing, you’ll need to follow these steps to switch to the package set with flavors:
 
+```
 # pkg set --change-name userland:os-generic-userland
 # pkg set --change-name userland-base:os-generic-userland-base
 # pkg set --change-name userland-docs:os-generic-userland-docs
 # pkg set --change-name kernel:os-generic-kernel
+```
 
 Repeat that process for lib32, debug, tests, or any other optional base packages you have installed. After you’re finished switching to the flavors package set,  run ‘pkg upgrade’ and it’ll upgrade you to the new packages.
 
 
 You can also switch between flavor packages using a similar method. For example, to switch from the generic -> zol flavors:
 
+```
 # pkg set --change-name os-generic-userland:os-zol-userland
 # pkg set --change-name os-generic-userland-base:os-zol-userland-base
 # pkg set --change-name os-generic-userland-docs:os-zol-userland-docs
 # pkg set --change-name os-generic-kernel:os-zol-kernel
+```
 
 Repeat this process for any other base packages you have installed. “#pkg info | grep ‘^os-’” can help you find any other installed base packages.
 
